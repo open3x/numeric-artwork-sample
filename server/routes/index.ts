@@ -1,10 +1,10 @@
 import { GlobalFonts, createCanvas, loadImage } from "@napi-rs/canvas";
 
 export default eventHandler(async (event) => {
-  const { address, value } = getQuery(event);
-  if (!address || !value) {
+  const { address, data } = getQuery(event);
+  if (!address || !data) {
     setResponseStatus(event, 400);
-    return { error: "address and value are required" };
+    return { error: "address and data are required" };
   }
 
   const [canvasW, canvasH] = [512, 512];
@@ -30,7 +30,7 @@ export default eventHandler(async (event) => {
 
     const font = await useStorage("assets:server").getItemRaw("Roboto-Bold.ttf");
     GlobalFonts.register(font, "Roboto-Bold");
-    const text = value.toLocaleString();
+    const text = data.toLocaleString();
     ctx.font = "96px Roboto-Bold";
     ctx.lineWidth = 6;
     const metrics = ctx.measureText(text);
