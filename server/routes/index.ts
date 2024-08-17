@@ -1,10 +1,13 @@
 import { GlobalFonts, createCanvas, loadImage } from "@napi-rs/canvas";
 
 export default eventHandler(async (event) => {
-  const { address, data } = getQuery(event);
-  if (!address || !data) {
+  let { address, data } = getQuery(event);
+  if (!address) {
     setResponseStatus(event, 400);
-    return { error: "address and data are required" };
+    return { error: "address is required" };
+  }
+  if (!data) {
+    data = "0";
   }
 
   const [canvasW, canvasH] = [512, 512];
