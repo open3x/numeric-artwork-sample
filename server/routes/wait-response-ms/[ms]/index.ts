@@ -1,5 +1,7 @@
 import { GlobalFonts, createCanvas, loadImage } from "@napi-rs/canvas";
 
+export const maxDuration = 60;
+
 export default eventHandler(async (event) => {
   let { address, data } = getQuery(event);
   if (!address) {
