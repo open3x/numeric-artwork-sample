@@ -7,8 +7,10 @@ export default eventHandler(async (event) => {
 
   const host = event.node.req.headers.host;
   const base = (process.env.NODE_ENV === "development" ? "http://" : "https://") + host;
-  const image = await loadImage(new URL("/star.webp", base));
-  ctx.drawImage(image, 0, 0);
+  const pancake = await loadImage(new URL("/pancake.webp", base));
+  ctx.drawImage(pancake, 0, 0);
+  const star = await loadImage(new URL("/star.webp", base));
+  ctx.drawImage(star, 0, 0);
 
   const buf = canvas.toBuffer("image/png");
   setHeaders(event, { "Content-Type": "image/png" });
